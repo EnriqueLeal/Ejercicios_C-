@@ -1,0 +1,17 @@
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\bin\Debug\netcoreapp3.1\Algortimo.exe
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\bin\Debug\netcoreapp3.1\Algortimo.deps.json
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\bin\Debug\netcoreapp3.1\Algortimo.runtimeconfig.json
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\bin\Debug\netcoreapp3.1\Algortimo.runtimeconfig.dev.json
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\bin\Debug\netcoreapp3.1\Algortimo.dll
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\bin\Debug\netcoreapp3.1\Algortimo.pdb
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.AssemblyInfoInputs.cache
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.AssemblyInfo.cs
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.dll
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.pdb
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.genruntimeconfig.cache
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\bin\Debug\netcoreapp3.1\Lucene.Net.dll
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll
+C:\Users\Usuario\source\repos\Algortimo\Algortimo\obj\Debug\netcoreapp3.1\Algortimo.csproj.CopyComplete
