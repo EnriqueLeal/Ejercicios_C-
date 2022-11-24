@@ -9,6 +9,9 @@ using System.Text;
 namespace Algortimo.Clases
 {
     #region Clases a ejectuar Ej:1
+
+    
+
     public class Clases_1
     {
         public int[] copyArray(int[] array)
@@ -67,6 +70,19 @@ namespace Algortimo.Clases
 
             return arreglo;
         }
+
+        public class Buscaminas_Table
+        {
+            public int Id { get; set; }
+
+            public int Vertical { get; set; }
+
+            public int Horizontal { get; set; }
+
+            public int EsMina { get; set; }
+
+            public string Valor { get; set; }
+        }
     }
     public class Conexion
     {
@@ -76,8 +92,6 @@ namespace Algortimo.Clases
             return "Siempre en conexion";
         }
     }
-
-
     public class DemoAlgoritmo
     {
         public void Ejecucion(Clases_1 Prueba2, int N_pregunta, int V1, int[] array, string _Search, bool Ejecutor)
