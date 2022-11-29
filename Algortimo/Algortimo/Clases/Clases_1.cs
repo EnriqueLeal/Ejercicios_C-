@@ -260,8 +260,159 @@ namespace Algortimo.Clases
 
 
         }
-        
+
         #endregion
+
+        #region Ejercicio 5 - Buscaminas
+        //BUSCADOR DE MINAS y AGREGA
+        public string GetMinas(int H, int V, List<Clases_1.Buscaminas_Table> Buscaminas, string Mina, string _Resultado)
+        {
+            //Buscaminas.Add(new Clases_1.Buscaminas_Table()
+            //{
+            //    Id = 1,
+            //    Horizontal = H,
+            //    Vertical = V,
+            //    EsMina = 1,
+            //    Valor = Mina
+
+            //});
+
+            //Buscaminas.Add(new Clases_1.Buscaminas_Table()
+            //{
+            //    Id = 2,
+            //    Horizontal = 0,
+            //    Vertical = 5,
+            //    EsMina = 1,
+            //    Valor = Mina
+
+            //});
+
+            //foreach (object item in Buscaminas)
+            //{
+            //    foreach (var fieldInfo in item.GetType().GetProperties())
+            //    {
+
+            //        var Key = fieldInfo.GetMethod.Name.Replace("get_", "");
+            //        var Value = fieldInfo.GetValue(item);
+
+
+            //        _Resultado += Value + "|";
+            //    }
+            //}
+            return _Resultado;
+        }
+
+        public void GetColocarMinas(string[,] arr2d, Random rnd, int _Valor, string Mina)
+        {
+            int Horizontal = rnd.Next(_Valor);
+            int Vertical = rnd.Next(_Valor);
+
+            arr2d[Horizontal, Vertical] = Mina;
+        }
+
+        public string[,] GetGenerarTablero(int _Valor, string[,] arr2d, string Caracter)
+        {
+            for (int i = 0; i < _Valor; i++)
+            {
+                for (int y = 0; y < _Valor; y++)
+                {
+                    arr2d[i, y] = Caracter;
+                }
+            }
+            return arr2d;
+        }
+
+        public void Buscaminas(int Horizontal, int Vertical,string[,] arr2d ,bool IncrementaXR, bool IncrementaXL, bool IncrementaYR, bool IncrementaYL, string Mina, int _Valor,int Limite,bool _Flag_Esquina, string Salto)
+        {
+            for (int i = 0; i <= Horizontal; i++)
+            {
+
+                if (i == Vertical && Horizontal == (Horizontal - 1 + 1))
+                {
+                    Console.WriteLine("Resultado X - R: {0},{1} - HAY UNA MINA\n ", Horizontal, i);
+                    arr2d[Horizontal, i] = Mina;
+                }
+
+                if (IncrementaXL && IncrementaYL)
+                {
+                    if (Horizontal + 1 < _Valor)
+                    {
+                        if (TieneValor(arr2d[Horizontal + 1, Vertical - 1]) >= 1)
+                            
+                        arr2d[Horizontal + 1, Vertical - 1] = "[1]";
+                    }
+                    arr2d[Horizontal - 1, Vertical - 1] = "[1]";
+                }
+                if (IncrementaXL)
+                {
+                    arr2d[Horizontal - 1, Vertical] = "[1]";
+                }
+                if (IncrementaXR)
+                {
+                    arr2d[Horizontal + 1, Vertical] = "[1]";
+                }
+                if (IncrementaXR && IncrementaYR)
+                {
+                    arr2d[Horizontal + 1, Vertical + 1] = "[1]";
+                    if (Horizontal >= 1)
+                    {
+                        arr2d[Horizontal - 1, Vertical + 1] = "[1]";
+                    }
+                    else
+                    {
+                        if (Vertical>=1)
+                        {
+                            arr2d[Horizontal + 1, Vertical - 1] = "[1]";
+                        }
+                        else
+                            arr2d[Horizontal + 1, Vertical] = "[1]";
+                    }
+                        
+                }
+                if (IncrementaXR && IncrementaYL)
+                {
+                    arr2d[Horizontal + 1, Vertical - 1] = "[1]";
+                }
+                if (IncrementaXL && IncrementaYR)
+                {
+
+                    arr2d[Horizontal - 1, Vertical + 1] = "[1]";
+                }
+
+                if (IncrementaYL)
+                {
+                    // arr2d[Horizontal - 1, i] = "[1]";
+                    arr2d[Horizontal, Vertical - 1] = "[1]";
+                }
+                if (IncrementaYR)
+                {
+                    arr2d[Horizontal, Vertical + 1] = "[1]";
+                }
+            }
+
+
+            if ((Horizontal + Vertical) % Limite == 0)
+                _Flag_Esquina = true;
+
+            int inc = 1;
+            foreach (string item in arr2d)
+            {
+                if (inc % _Valor == 0)
+                    Salto = "\n";
+                else
+                    Salto = "";
+
+                Console.Write(item + Salto);
+                inc++;
+            }
+        }
+        #endregion
+
+        public int TieneValor(string Result)
+        {
+           Result = Result.Replace("[", "").Replace("]", "");
+            return Convert.ToInt32(Result);
+        }
 
 
     }
