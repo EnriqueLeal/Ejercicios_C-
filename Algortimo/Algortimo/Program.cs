@@ -11,6 +11,7 @@ namespace Algortimo
         public static int Counter { get; set; }
         public static string _Resultado { get; set; }
         public static int _Valor { get; set; }
+        
     }
     class Program
     {
@@ -20,7 +21,7 @@ namespace Algortimo
         public static bool Ejecutor { get; set; }
 
         public static Random rnd = new Random();
-
+        public static string _TodosBuscados { get; set; }
 
         public class Ejercicios
         {
@@ -31,14 +32,14 @@ namespace Algortimo
             public int Estatus { get; set; }
         }
 
-            static void Main(string[] args)
+        static void Main(string[] args)
         {
 
             #region ~~~~~~Variables~~~~~~
             int V1 = 0;
             int arreglo = 0;
             Ejecutor = false;
-            int N_pregunta =0;
+            int N_pregunta = 0;
             int[] a = { 1, 2, 3, 4 };
             int[] b = { 1, 2, 3, 4 };
             int[] array = { 1, 2, 3, 4 };
@@ -59,7 +60,7 @@ namespace Algortimo
             //ARRAY ESTATICO SI NO SE SELECIONA LA CANTIDAD
             List<Ejercicios> E = new List<Ejercicios>();
 
-            E.Add(new Ejercicios() { Id = 1, Nombre = "AppendToNew - copyArray", Estatus = 1});
+            E.Add(new Ejercicios() { Id = 1, Nombre = "AppendToNew - copyArray", Estatus = 1 });
             E.Add(new Ejercicios() { Id = 2, Nombre = "Array - Intersection", Estatus = 1 });
             E.Add(new Ejercicios() { Id = 3, Nombre = "En mantenimiento", Estatus = 0 });
             E.Add(new Ejercicios() { Id = 4, Nombre = "<-- Contiene número Pares -->", Estatus = 1 });
@@ -128,7 +129,7 @@ namespace Algortimo
                     {
                         EjecutaBuscaminas();
                     }
-                    
+
 
                     break;
                 default:
@@ -137,13 +138,13 @@ namespace Algortimo
             }
             #endregion
 
-           
+
             Console.ReadKey();
 
         }
-        
 
-            public static int repeatedLogicalShift(int x, int count)
+
+        public static int repeatedLogicalShift(int x, int count)
         {
             for (int i = 0; i < count; i++)
             {
@@ -160,12 +161,12 @@ namespace Algortimo
                 return false;
 
             for (int i = 2; i < n; i++)
-                   if (n % i == 0)
-                        return false;
+                if (n % i == 0)
+                    return false;
 
 
-        //----------------------------------//
-                return true;
+            //----------------------------------//
+            return true;
         }
         public static bool PrimeSlightlyBetter(int n)
         {
@@ -175,7 +176,7 @@ namespace Algortimo
             int sqrt = (int)Math.Sqrt(n);
 
             for (int i = 2; i <= sqrt; i++)
-                if (n % i == 0) 
+                if (n % i == 0)
                     return false;
 
             return true;
@@ -197,13 +198,7 @@ namespace Algortimo
             string Mina = "[*]";
             const int _Valor = 6;
             int Cantidad_minas = 1;
-            int Id = 0;
-            int EsMina = 0;
-            string Valor = "";
-            int Multiplica = 5;
             int Limite = 3;
-            int LimiteX = 0;
-            int LimiteY = 0;
             bool _Flag_Esquina = false;
             string Salto = "";
             #endregion
@@ -215,12 +210,6 @@ namespace Algortimo
             var Buscaminas = new List<Clases_1.Buscaminas_Table>();
 
             _Resultado = Ejecutar.GetMinas(Horizontal, Vertical, Buscaminas, Mina, _Resultado);
-            //COLOCAR MINAS
-            //string[] parts = _Resultado.Split('|');
-            //int Numero = parts.GetLength(0);
-            //int R = (Numero - 1) % 5;
-            //
-            //CREAR TABLE PARA BUSCAMINAS
             string[,] arr2d = new string[_Valor, _Valor];
 
             arr2d = Ejecutar.GetGenerarTablero(_Valor, arr2d, Caracter);
@@ -232,14 +221,10 @@ namespace Algortimo
 
             for (int i = 1; i <= Cantidad_minas; i++)
             {
-                Ejecutar.GetColocarMinas(arr2d,rnd,_Valor, Mina);
+                Ejecutar.GetColocarMinas(arr2d, rnd, _Valor, Mina);
             }
-            //
-            //AGREGA EL VALOR
-            //arr2d[0, 5] = Mina;
-            //arr2d[Horizontal, Vertical] = Mina;
-           
 
+        //Inicio:
             for (int m = 0; m <= _Valor - 1; m++)
             {
                 for (int x = 0; x <= _Valor - 1; x++)
@@ -278,12 +263,103 @@ namespace Algortimo
                         Ejecutar.Buscaminas(m, x, arr2d, IncrementaXR, IncrementaXL, IncrementaYR, IncrementaYL, Mina, _Valor, Limite, _Flag_Esquina, Salto);
 
 
+                        int inc = 1;
+                        foreach (string item in arr2d)
+                        {
+                            if (inc % _Valor == 0)
+                                Salto = "\n";
+                            else
+                                Salto = "";
+
+                            Console.Write("[?]" + Salto);
+                            inc++;
+                        }
+
+
                         #endregion
                     }
                 }
             }
 
-            
+        Sigue:
+            Console.WriteLine("Introduzca valor a buscar Ejemplo (0,0)");
+            string ResultadoBusqueda = Console.ReadLine();
+
+            try
+            {
+                if (Convert.ToInt32(ResultadoBusqueda.Split(',')[0]) >= _Valor || Convert.ToInt32(ResultadoBusqueda.Split(',')[1]) >= _Valor)
+                {
+                    Console.WriteLine("\nIntroduzca rango: 0,0 - {0},{1}", _Valor - 1, _Valor - 1);
+                    goto Sigue;
+                }
+
+            }
+            catch (Exception)
+            {
+                if (!ResultadoBusqueda.Contains(","))
+                {
+                    goto Sigue;
+                }
+                goto Sigue;
+                throw;
+            }
+
+
+            _TodosBuscados += ResultadoBusqueda + "|";
+            bool Bandera_win = false;
+
+            if (arr2d[Convert.ToInt32(ResultadoBusqueda.Split(',')[0]), Convert.ToInt32(ResultadoBusqueda.Split(',')[1])] == "[*]")
+            {
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Fin del juego");
+            }
+            else
+            {
+                string[] parts = _TodosBuscados.Split('|');
+                int Numero = parts.GetLength(0);
+                Array.Sort(parts);
+                int inc = 1;
+                string[,] arr2d_Feik = new string[_Valor, _Valor];
+
+                DesencadenadorFor(_Valor, parts, arr2d_Feik, arr2d);
+                
+
+                Console.Clear();
+
+                foreach (string item in arr2d_Feik)
+                {
+
+                    if (inc % _Valor == 0)
+                        Salto = "\n";
+                    else
+                        Salto = "";
+
+                    Console.Write(item + Salto);
+                    inc++;
+                }
+
+
+                int Contador = 0;
+                foreach (string item in arr2d_Feik)
+                    if (item == "[?]")
+                        Contador++;
+
+                if (Contador == 1)
+                    Bandera_win = true;
+
+
+
+                if (Bandera_win)
+                    goto Winner;
+                else
+                    goto Sigue;
+            }
+        Winner:
+            if (Bandera_win)
+            {
+                Console.WriteLine("FELICIDADES HAS GANADO EL MINI JUEGO:");
+                Console.ReadKey();
+            }
 
 
             #region *-Basura-*
@@ -333,6 +409,38 @@ namespace Algortimo
             //}
             //Console.WriteLine("Cantidad total de cambios {0}", ConteoArray.counter);
             #endregion
+        }
+        public static bool Get_SimilitudValor(int H, int V, string [] parts)
+        {
+
+            string Combine = ""+H+","+V+"";
+            foreach (string part in parts)
+            {
+                if (Combine == part)
+                {
+                    return true;
+                }
+               
+            }
+            return false;
+        }
+
+        private static void DesencadenadorFor(int _Valor, string[] parts, string[,] arr2d_Feik, string[,] arr2d)
+        {
+            for (int i = 0; i < _Valor; i++)
+            {
+                for (int y = 0; y < _Valor; y++)
+                {
+                    bool Bandera = Get_SimilitudValor(i, y, parts);
+                    if (Bandera)
+                    {
+                        arr2d_Feik[i, y] = arr2d[i, y];
+                    }
+                    else
+                        arr2d_Feik[i, y] = "[?]";
+
+                }
+            }
         }
         #endregion
     }

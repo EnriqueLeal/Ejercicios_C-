@@ -267,38 +267,6 @@ namespace Algortimo.Clases
         //BUSCADOR DE MINAS y AGREGA
         public string GetMinas(int H, int V, List<Clases_1.Buscaminas_Table> Buscaminas, string Mina, string _Resultado)
         {
-            //Buscaminas.Add(new Clases_1.Buscaminas_Table()
-            //{
-            //    Id = 1,
-            //    Horizontal = H,
-            //    Vertical = V,
-            //    EsMina = 1,
-            //    Valor = Mina
-
-            //});
-
-            //Buscaminas.Add(new Clases_1.Buscaminas_Table()
-            //{
-            //    Id = 2,
-            //    Horizontal = 0,
-            //    Vertical = 5,
-            //    EsMina = 1,
-            //    Valor = Mina
-
-            //});
-
-            //foreach (object item in Buscaminas)
-            //{
-            //    foreach (var fieldInfo in item.GetType().GetProperties())
-            //    {
-
-            //        var Key = fieldInfo.GetMethod.Name.Replace("get_", "");
-            //        var Value = fieldInfo.GetValue(item);
-
-
-            //        _Resultado += Value + "|";
-            //    }
-            //}
             return _Resultado;
         }
 
@@ -306,8 +274,9 @@ namespace Algortimo.Clases
         {
             int Horizontal = rnd.Next(_Valor);
             int Vertical = rnd.Next(_Valor);
-
+     
             arr2d[Horizontal, Vertical] = Mina;
+            //arr2d[10,11] = Mina;
         }
 
         public string[,] GetGenerarTablero(int _Valor, string[,] arr2d, string Caracter)
@@ -328,66 +297,59 @@ namespace Algortimo.Clases
             {
 
                 if (i == Vertical && Horizontal == (Horizontal - 1 + 1))
-                {
                     Console.WriteLine("Resultado X - R: {0},{1} - HAY UNA MINA\n ", Horizontal, i);
-                    arr2d[Horizontal, i] = Mina;
-                }
+
 
                 if (IncrementaXL && IncrementaYL)
                 {
                     if (Horizontal + 1 < _Valor)
-                    {
-                        if (TieneValor(arr2d[Horizontal + 1, Vertical - 1]) >= 1)
-                            
-                        arr2d[Horizontal + 1, Vertical - 1] = "[1]";
-                    }
-                    arr2d[Horizontal - 1, Vertical - 1] = "[1]";
+                        arr2d[Horizontal + 1, Vertical - 1] = TieneValor(arr2d, Convert.ToInt32(Horizontal + 1 ), Convert.ToInt32(Vertical - 1), _Valor);
+
+                    if (Horizontal > 0)
+                        arr2d[Horizontal - 1, Vertical - 1] = TieneValor( arr2d,Convert.ToInt32(Horizontal - 1), Convert.ToInt32(Vertical - 1), _Valor);
+
                 }
                 if (IncrementaXL)
-                {
-                    arr2d[Horizontal - 1, Vertical] = "[1]";
-                }
+                    arr2d[Horizontal - 1, Vertical] = TieneValor(arr2d, Convert.ToInt32(Horizontal - 1), Convert.ToInt32(Vertical), _Valor);
+
                 if (IncrementaXR)
                 {
-                    arr2d[Horizontal + 1, Vertical] = "[1]";
+                    if (Horizontal > 0)
+                        arr2d[Horizontal - 1, Vertical] = TieneValor(arr2d, Convert.ToInt32(Horizontal - 1), Convert.ToInt32(Vertical), _Valor);
+
+                    arr2d[Horizontal + 1, Vertical] = TieneValor(arr2d, Convert.ToInt32(Horizontal + 1), Convert.ToInt32(Vertical), _Valor);
+
                 }
                 if (IncrementaXR && IncrementaYR)
                 {
-                    arr2d[Horizontal + 1, Vertical + 1] = "[1]";
+                    arr2d[Horizontal + 1, Vertical + 1] = TieneValor(arr2d, Convert.ToInt32(Horizontal + 1), Convert.ToInt32(Vertical + 1), _Valor);
+
                     if (Horizontal >= 1)
-                    {
-                        arr2d[Horizontal - 1, Vertical + 1] = "[1]";
-                    }
+                        arr2d[Horizontal - 1, Vertical + 1] = TieneValor(arr2d, Convert.ToInt32(Horizontal - 1), Convert.ToInt32(Vertical + 1), _Valor);
+
                     else
                     {
                         if (Vertical>=1)
-                        {
-                            arr2d[Horizontal + 1, Vertical - 1] = "[1]";
-                        }
+                            arr2d[Horizontal + 1, Vertical - 1] = TieneValor(arr2d, Convert.ToInt32(Horizontal + 1), Convert.ToInt32(Vertical - 1), _Valor);
+
                         else
-                            arr2d[Horizontal + 1, Vertical] = "[1]";
+                            arr2d[Horizontal + 1, Vertical] = TieneValor(arr2d, Convert.ToInt32(Horizontal + 1), Convert.ToInt32(Vertical), _Valor);
                     }
                         
                 }
                 if (IncrementaXR && IncrementaYL)
-                {
-                    arr2d[Horizontal + 1, Vertical - 1] = "[1]";
-                }
-                if (IncrementaXL && IncrementaYR)
-                {
+                    arr2d[Horizontal + 1, Vertical - 1] = TieneValor(arr2d, Convert.ToInt32(Horizontal + 1), Convert.ToInt32(Vertical - 1), _Valor);
 
-                    arr2d[Horizontal - 1, Vertical + 1] = "[1]";
-                }
+                if (IncrementaXL && IncrementaYR)
+                    arr2d[Horizontal - 1, Vertical + 1] = TieneValor(arr2d, Convert.ToInt32(Horizontal- 1), Convert.ToInt32(Vertical + 1), _Valor);
+
 
                 if (IncrementaYL)
-                {
-                    // arr2d[Horizontal - 1, i] = "[1]";
-                    arr2d[Horizontal, Vertical - 1] = "[1]";
-                }
+                    arr2d[Horizontal, Vertical - 1] = TieneValor(arr2d, Convert.ToInt32(Horizontal), Convert.ToInt32(Vertical -1), _Valor);
+    
                 if (IncrementaYR)
-                {
-                    arr2d[Horizontal, Vertical + 1] = "[1]";
-                }
+                    arr2d[Horizontal, Vertical + 1] = TieneValor(arr2d, Convert.ToInt32(Horizontal), Convert.ToInt32(Vertical+ 1), _Valor);
+
             }
 
 
@@ -395,23 +357,158 @@ namespace Algortimo.Clases
                 _Flag_Esquina = true;
 
             int inc = 1;
-            foreach (string item in arr2d)
-            {
-                if (inc % _Valor == 0)
-                    Salto = "\n";
-                else
-                    Salto = "";
-
-                Console.Write(item + Salto);
-                inc++;
-            }
+            
         }
         #endregion
 
-        public int TieneValor(string Result)
+        public string TieneValor(string [,] arr2d,int H,int V,int Limite)
         {
-           Result = Result.Replace("[", "").Replace("]", "");
-            return Convert.ToInt32(Result);
+            string Result = string.Empty;
+            int countMinas = 0;
+            bool LEFT_MenosMenos = false;
+            bool LEFT_MenosMas = false;
+
+            bool RIGHT_MenosMenos = false;
+            bool RIGHT_MasMenos = false;
+            bool RIGHT_MasMas = false;
+            bool RIGHT_MenosMas = false;
+            string CaracterMina = "*";
+            bool ExisteUnaMina = false;
+
+            try
+            {
+                if (arr2d[H,V].Contains(CaracterMina))
+                {
+                    ExisteUnaMina = true;
+                }
+                if (ExisteUnaMina == false)
+                {
+                    //Posicion Izquierda superior
+                    if (H > 0 && V > 0 && H < Limite && V < Limite)
+                    {
+                        if ((H - 1) >= 0 && (V - 1) >= 0)
+                        {
+                            if (arr2d[H - 1, V - 1].Contains(CaracterMina))
+                            {
+                                countMinas++;
+                                LEFT_MenosMenos = true;
+                            }
+
+                        }
+                    }
+
+
+                    if (H > 0 && V < Limite && H < Limite)
+                    {
+                        if ((H - 1) >= 0 && (V + 1) < Limite)
+                        {
+                            if (arr2d[H - 1, V + 1].Contains(CaracterMina))
+                            {
+                                countMinas++;
+                                LEFT_MenosMas = true;
+                            }
+
+                        }
+                    }
+
+                    //Posicion izquierda inferior
+                    if (H > 0 && H < Limite)
+                    {
+
+                            if (arr2d[H - 1, V].Contains(CaracterMina))
+                            {
+                                countMinas++;
+                            }
+                    }
+
+
+                    //Posicion Derecha superior
+                    if (H < Limite && V > 0 && V < Limite)
+                    {
+                        if ((H + 1) < Limite && (V - 1) >= 0)
+                        {
+                            if (arr2d[H + 1, V - 1].Contains(CaracterMina))
+                            {
+                                countMinas++;
+                                RIGHT_MasMenos = true;
+                            }
+
+                        }
+                    }
+
+                    //Posicion Derecha Inferior
+                    if (H < Limite && V < Limite)
+                    {
+                        if ((H + 1) < Limite && (V + 1) < Limite)
+                        {
+                            if (arr2d[H + 1, V + 1].Contains(CaracterMina))
+                            {
+                                countMinas++;
+                                RIGHT_MasMas = true;
+                            }
+
+                        }
+                    }
+
+                    if (H < Limite - 1)
+                    {
+                            if (arr2d[H + 1, V].Contains(CaracterMina))
+                            {
+                                countMinas++;
+                            }
+                    }
+
+
+                    if (V > 0 && V < Limite)
+                    {
+                        if (arr2d[H, V - 1].Contains(CaracterMina))
+                        {
+                            countMinas++;
+                        }
+
+                    }
+
+                    if (V < Limite - 1)
+                    {
+                        if (arr2d[H, V + 1].Contains(CaracterMina))
+                        {
+                            countMinas++;
+                        }
+                    }
+
+                    if (H < Limite - 1 && V < Limite - 1 || H > 0 && V < Limite  - 1 || H < Limite  - 1&& V > 0)
+                    {
+
+                    }
+                    else
+                    {
+                            if (arr2d[H + 1, V + 1].Contains(CaracterMina))
+                            {
+                                countMinas++;
+                            }
+                    }
+                }
+                else
+                    Result = "*";
+
+
+
+
+                //if (countMinas == 0)
+                //{
+                //    countMinas++;
+                //}
+                Result = (Convert.ToInt32(countMinas)).ToString();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Encontro un bug: {0}",ex);
+            }
+            finally
+            {
+                
+            }
+            return "[" + Result + "]";
         }
 
 
